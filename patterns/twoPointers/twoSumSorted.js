@@ -1,3 +1,5 @@
+// Approach 1
+
 function twoSumSorted(arr, target) {
   if (arr.length === 0) return [];
 
@@ -15,3 +17,20 @@ while (left < arr.length && right >= 0) {
   }
 }
 }
+
+// Approach 2
+var twoSum = function(numbers, target) {
+  let start = 0;
+  let end = numbers.length - 1;
+  while (start < end) {
+    let currSum = numbers[start] + numbers[end];
+    if (currSum === target) {
+      return [start + 1, end + 1];
+    }
+    if (currSum < target) {
+      start++;
+    } else {
+      end--;
+    }
+  }
+};
