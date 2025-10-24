@@ -1,8 +1,9 @@
 /*
 
-                      A
-                  B         C
-            D        E  F       G
+                       A
+          B                         C
+    D            E            F            G
+H                                  I         
 
 inorder: L > C > R
 preorder: C > L > R
@@ -47,3 +48,24 @@ function postOrder (root, values = []) {
   values.push(root.value);
   return values;
 }
+
+let treeB = new TreeNode("B",
+                new TreeNode("D",
+                  new TreeNode("H")
+                ),
+                new TreeNode("E")
+);
+let treeC = new TreeNode("C",
+                new TreeNode("F",
+                    null,
+                    new TreeNode("I")
+                ),
+                new TreeNode("G")
+);
+
+let treeA = new TreeNode("A",
+                treeB,
+                treeC
+);
+
+console.log(inOrder(treeA));
