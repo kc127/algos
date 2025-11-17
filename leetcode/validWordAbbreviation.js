@@ -82,3 +82,44 @@ function isAlpha(char) {
 // console.log(validWordAbbreviation('substitution', 's10n'), ' expect true');
 console.log(validWordAbbreviation('internationalization', 'i5a11o1'), ' expect true');
 
+/** Approach 2 - Optimal Solution */
+/**
+ * @param {string} word
+ * @param {string} abbr
+ * @return {boolean}
+ */
+var validWordAbbreviation = function(word, abbr) {
+  let wordLen = word.length;
+  let abbrLen = abbr.length;
+
+  let wordIdx = 0;
+  let abbrIdx = 0;
+  let skipCount = 0;
+
+  while (wordIdx < wordLen && abbrIdx < abbrLen) {
+      let curr = abbr[abbrIdx];
+
+      if (curr >= '0' && curr <= '9') {
+          if (curr === '0' && skipCount === 0) {
+              return false;
+          }
+
+          skipCount = skipCount * 10 + Number(curr);
+          abbrIdx++;
+      } else {
+          wordIdx += skipCount;
+          skipCount = 0;
+
+          if (wordIdx >= wordLen || word[wordIdx] !== curr) {
+              return false;
+          }
+          wordIdx++;
+          abbrIdx++;
+      }
+  }
+
+  wordIdx += skipCount;
+
+  return wordIdx === wordLen && abbrIdx === abbrLen;
+};
+
